@@ -92,50 +92,49 @@
   });
 
   // Add your javascript here
-})();
-
-function smoothScroll(target) {
-  const targetSection = document.querySelector(target);
-  window.scrollTo({
-    top: targetSection.offsetTop,
-    behavior: "smooth",
-  });
-}
-
-function setActiveLink() {
-  const sections = document.querySelectorAll("section");
-  const navLinks = document.querySelectorAll(".nav-link");
-
-  let currentSection = "";
-
-  sections.forEach((section) => {
-    const sectionTop = section.offsetTop;
-    if (window.scrollY >= sectionTop - 50) {
-      currentSection = section.getAttribute("id");
-    }
-  });
-
-  navLinks.forEach((link) => {
-    link.classList.remove("active");
-  });
-
-  if (currentSection) {
-    navLinks.forEach((link) => {
-      if (link.getAttribute("data-target") === `#${currentSection}`) {
-        link.classList.add("active");
-      }
+  function smoothScroll(target) {
+    const targetSection = document.querySelector(target);
+    window.scrollTo({
+      top: targetSection.offsetTop,
+      behavior: "smooth",
     });
   }
-}
 
-document.querySelectorAll(".nav-link").forEach((link) => {
-  link.addEventListener("click", function (e) {
-    e.preventDefault();
-    const target = this.getAttribute("data-target");
-    smoothScroll(target);
+  function setActiveLink() {
+    const sections = document.querySelectorAll("section");
+    const navLinks = document.querySelectorAll(".nav-link");
+
+    let currentSection = "";
+
+    sections.forEach((section) => {
+      const sectionTop = section.offsetTop;
+      if (window.scrollY >= sectionTop - 50) {
+        currentSection = section.getAttribute("id");
+      }
+    });
+
+    navLinks.forEach((link) => {
+      link.classList.remove("active");
+    });
+
+    if (currentSection) {
+      navLinks.forEach((link) => {
+        if (link.getAttribute("data-target") === `#${currentSection}`) {
+          link.classList.add("active");
+        }
+      });
+    }
+  }
+
+  document.querySelectorAll(".nav-link").forEach((link) => {
+    link.addEventListener("click", function (e) {
+      e.preventDefault();
+      const target = this.getAttribute("data-target");
+      smoothScroll(target);
+    });
   });
-});
 
-window.addEventListener("scroll", setActiveLink);
+  window.addEventListener("scroll", setActiveLink);
 
-document.addEventListener("DOMContentLoaded", setActiveLink);
+  document.addEventListener("DOMContentLoaded", setActiveLink);
+})();
